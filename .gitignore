@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+target/
+.anchor/
+
+# Environment
+.env
+**/.env
+
+# Solana
+test-ledger/
+**/*.so
+**/*-keypair.json
+
+# Prisma
+**/prisma/migrations/
+
+# Misc
+.DS_Store
+*.log

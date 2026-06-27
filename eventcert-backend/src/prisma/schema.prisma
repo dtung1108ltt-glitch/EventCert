@@ -1,0 +1,43 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Event {
+  id           String   @id @default(uuid())
+  eventId      String   @unique
+  name         String
+  description  String
+  organizerKey String
+  eventPDA     String
+  startTime    DateTime
+  endTime      DateTime
+  maxAttendees Int
+  createdAt    DateTime @default(now())
+
+  attendees AttendeeRecord[]
+}
+
+model AttendeeRecord {
+  id           String   @id @default(uuid())
+  eventId      String
+  attendeeKey  String
+  recordPDA    String
+  checkedInAt  DateTime @default(now())
+
+  event Event @relation(fields: [eventId], references: [eventId])
+
+  @@unique([eventId, attendeeKey])
+}
+
+model LoyaltyVault {
+  id          String @id @default(uuid())
+  attendeeKey String @unique
+  vaultPDA    String
+  totalPoints Int    @default(0)
+  updatedAt   DateTime @updatedAt
+}

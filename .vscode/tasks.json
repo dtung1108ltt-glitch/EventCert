@@ -1,0 +1,42 @@
+mkdir -p ~/eventcert-program/.vscode
+cat > ~/eventcert-program/.vscode/tasks.json << 'EOF'
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "1. Start Validator",
+      "type": "shell",
+      "command": "pkill solana-test-validator; sleep 1; solana-test-validator",
+      "isBackground": true,
+      "problemMatcher": {
+        "pattern": { "regexp": "." },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": "Ledger location",
+          "endsPattern": "JSON RPC URL"
+        }
+      },
+      "presentation": { "panel": "dedicated", "reveal": "always" }
+    },
+    {
+      "label": "2. Build Program",
+      "type": "shell",
+      "command": "anchor build",
+      "presentation": { "panel": "dedicated", "reveal": "always" }
+    },
+    {
+      "label": "3. Run Tests",
+      "type": "shell",
+      "command": "anchor test --skip-local-validator",
+      "dependsOn": "2. Build Program",
+      "presentation": { "panel": "dedicated", "reveal": "always" }
+    },
+    {
+      "label": "4. Deploy to Devnet",
+      "type": "shell",
+      "command": "anchor deploy --provider.cluster devnet",
+      "presentation": { "panel": "dedicated", "reveal": "always" }
+    }
+  ]
+}
+EOF

@@ -1,0 +1,889 @@
+{
+  "address": "8AVFzXLHah4DugdA4KDSpEUGnedd6gm7yz9B7XvSFDej",
+  "metadata": {
+    "name": "eventcert_program",
+    "version": "0.1.0",
+    "spec": "0.1.0"
+  },
+  "instructions": [
+    {
+      "name": "award_points",
+      "discriminator": [
+        7,
+        146,
+        136,
+        192,
+        102,
+        71,
+        93,
+        106
+      ],
+      "accounts": [
+        {
+          "name": "organizer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "event_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  118,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "event_account.organizer",
+                "account": "EventAccount"
+              },
+              {
+                "kind": "account",
+                "path": "event_account.event_id",
+                "account": "EventAccount"
+              }
+            ]
+          }
+        },
+        {
+          "name": "attendee_record",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  116,
+                  116,
+                  101,
+                  110,
+                  100,
+                  101,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "event_account"
+              },
+              {
+                "kind": "account",
+                "path": "attendee"
+              }
+            ]
+          }
+        },
+        {
+          "name": "loyalty_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "attendee"
+              }
+            ]
+          }
+        },
+        {
+          "name": "attendee",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "check_in_attendee",
+      "discriminator": [
+        149,
+        45,
+        160,
+        150,
+        236,
+        156,
+        168,
+        14
+      ],
+      "accounts": [
+        {
+          "name": "attendee",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "event_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  118,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "event_account.organizer",
+                "account": "EventAccount"
+              },
+              {
+                "kind": "account",
+                "path": "event_account.event_id",
+                "account": "EventAccount"
+              }
+            ]
+          }
+        },
+        {
+          "name": "attendee_record",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  116,
+                  116,
+                  101,
+                  110,
+                  100,
+                  101,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "event_account"
+              },
+              {
+                "kind": "account",
+                "path": "attendee"
+              }
+            ]
+          }
+        },
+        {
+          "name": "loyalty_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "attendee"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "create_qr_session",
+      "discriminator": [
+        230,
+        120,
+        0,
+        86,
+        244,
+        168,
+        223,
+        147
+      ],
+      "accounts": [
+        {
+          "name": "organizer",
+          "signer": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "initialize_event",
+      "discriminator": [
+        126,
+        249,
+        86,
+        221,
+        202,
+        171,
+        134,
+        20
+      ],
+      "accounts": [
+        {
+          "name": "organizer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "event_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  118,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "organizer"
+              },
+              {
+                "kind": "arg",
+                "path": "event_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "event_id",
+          "type": "u64"
+        },
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "start_time",
+          "type": "i64"
+        },
+        {
+          "name": "end_time",
+          "type": "i64"
+        },
+        {
+          "name": "max_attendees",
+          "type": "u32"
+        }
+      ]
+    },
+    {
+      "name": "mint_badge",
+      "discriminator": [
+        242,
+        234,
+        237,
+        183,
+        232,
+        245,
+        146,
+        1
+      ],
+      "accounts": [
+        {
+          "name": "organizer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "event_account",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  118,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "event_account.organizer",
+                "account": "EventAccount"
+              },
+              {
+                "kind": "account",
+                "path": "event_account.event_id",
+                "account": "EventAccount"
+              }
+            ]
+          }
+        },
+        {
+          "name": "attendee_record",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  116,
+                  116,
+                  101,
+                  110,
+                  100,
+                  101,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "event_account"
+              },
+              {
+                "kind": "account",
+                "path": "attendee"
+              }
+            ]
+          }
+        },
+        {
+          "name": "attendee",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "badge_mint_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  97,
+                  100,
+                  103,
+                  101,
+                  95,
+                  109,
+                  105,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "attendee_record"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "metadata_uri",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "redeem_points",
+      "discriminator": [
+        178,
+        79,
+        85,
+        218,
+        121,
+        101,
+        34,
+        12
+      ],
+      "accounts": [
+        {
+          "name": "organizer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "event_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  118,
+                  101,
+                  110,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "event_account.organizer",
+                "account": "EventAccount"
+              },
+              {
+                "kind": "account",
+                "path": "event_account.event_id",
+                "account": "EventAccount"
+              }
+            ]
+          }
+        },
+        {
+          "name": "attendee_record",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  116,
+                  116,
+                  101,
+                  110,
+                  100,
+                  101,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "event_account"
+              },
+              {
+                "kind": "account",
+                "path": "attendee"
+              }
+            ]
+          }
+        },
+        {
+          "name": "loyalty_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "attendee"
+              }
+            ]
+          }
+        },
+        {
+          "name": "attendee",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "AttendeeRecord",
+      "discriminator": [
+        117,
+        227,
+        32,
+        251,
+        112,
+        133,
+        145,
+        142
+      ]
+    },
+    {
+      "name": "BadgeMint",
+      "discriminator": [
+        148,
+        99,
+        64,
+        184,
+        2,
+        214,
+        132,
+        228
+      ]
+    },
+    {
+      "name": "EventAccount",
+      "discriminator": [
+        98,
+        136,
+        32,
+        165,
+        133,
+        231,
+        243,
+        154
+      ]
+    },
+    {
+      "name": "LoyaltyVault",
+      "discriminator": [
+        182,
+        209,
+        4,
+        94,
+        98,
+        129,
+        58,
+        118
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "BadgeMinted",
+      "discriminator": [
+        53,
+        227,
+        68,
+        72,
+        115,
+        78,
+        25,
+        14
+      ]
+    },
+    {
+      "name": "CheckInEvent",
+      "discriminator": [
+        108,
+        50,
+        254,
+        20,
+        67,
+        33,
+        188,
+        229
+      ]
+    },
+    {
+      "name": "PointsAwarded",
+      "discriminator": [
+        201,
+        95,
+        152,
+        50,
+        215,
+        83,
+        188,
+        38
+      ]
+    },
+    {
+      "name": "PointsRedeemed",
+      "discriminator": [
+        57,
+        161,
+        97,
+        67,
+        102,
+        120,
+        85,
+        147
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "EventNotStarted",
+      "msg": "Event not started"
+    },
+    {
+      "code": 6001,
+      "name": "EventEnded",
+      "msg": "Event ended"
+    },
+    {
+      "code": 6002,
+      "name": "EventFull",
+      "msg": "Event full"
+    },
+    {
+      "code": 6003,
+      "name": "InsufficientPoints",
+      "msg": "Insufficient points"
+    },
+    {
+      "code": 6004,
+      "name": "Overflow",
+      "msg": "Overflow"
+    }
+  ],
+  "types": [
+    {
+      "name": "AttendeeRecord",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "event",
+            "type": "pubkey"
+          },
+          {
+            "name": "attendee",
+            "type": "pubkey"
+          },
+          {
+            "name": "checked_in_at",
+            "type": "i64"
+          },
+          {
+            "name": "badge_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "points_awarded",
+            "type": "u32"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BadgeMint",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "event",
+            "type": "pubkey"
+          },
+          {
+            "name": "metadata_uri",
+            "type": "string"
+          },
+          {
+            "name": "minted_at",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BadgeMinted",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "event",
+            "type": "pubkey"
+          },
+          {
+            "name": "attendee",
+            "type": "pubkey"
+          },
+          {
+            "name": "badge_mint",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CheckInEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "event",
+            "type": "pubkey"
+          },
+          {
+            "name": "attendee",
+            "type": "pubkey"
+          }
+        ]
+      }
+    },
+    {
+      "name": "EventAccount",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "organizer",
+            "type": "pubkey"
+          },
+          {
+            "name": "event_id",
+            "type": "u64"
+          },
+          {
+            "name": "name",
+            "type": "string"
+          },
+          {
+            "name": "start_time",
+            "type": "i64"
+          },
+          {
+            "name": "end_time",
+            "type": "i64"
+          },
+          {
+            "name": "max_attendees",
+            "type": "u32"
+          },
+          {
+            "name": "checked_in_count",
+            "type": "u32"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "LoyaltyVault",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "total_points",
+            "type": "u64"
+          },
+          {
+            "name": "redeemed_points",
+            "type": "u64"
+          },
+          {
+            "name": "last_updated",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PointsAwarded",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "event",
+            "type": "pubkey"
+          },
+          {
+            "name": "attendee",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "total_points",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PointsRedeemed",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "event",
+            "type": "pubkey"
+          },
+          {
+            "name": "attendee",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "redeemed_points",
+            "type": "u64"
+          }
+        ]
+      }
+    }
+  ]
+}

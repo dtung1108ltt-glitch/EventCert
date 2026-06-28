@@ -528,4 +528,8 @@ GitHub: https://github.com/dtung1108ltt-glitch/EventCert
 
 ---
 
+<<<<<<< HEAD
 *Built with ❤️ on Solana — Ho Chi Minh City, June 2026*
+=======
+*Built with ❤️ on Solana — Ho Chi Minh City, June 2026*
+>>>>>>> 7b4b64c (Update UI login)
